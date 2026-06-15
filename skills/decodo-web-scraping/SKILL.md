@@ -81,8 +81,10 @@ npm install -g @decodo/cli                                # any platform
 1. **Shell available** (Claude Code, Cursor, Codex CLI, Gemini CLI, Windsurf, terminal) → use
    the **`decodo` CLI**. This is the default and the rest of this skill assumes it.
 2. **No shell** (Claude Desktop, claude.ai, an MCP-only client) → use the hosted **MCP server**
-   at `https://mcp.decodo.com/mcp` (Basic auth with the same token). Add it as an MCP connector.
-3. **Neither** → call the **raw HTTP API** with `curl` (see *Raw API fallback*).
+   at `https://mcp.decodo.com/mcp` (Basic auth with the same token). Per-client config in
+   [`references/mcp-setup.md`](references/mcp-setup.md).
+3. **Neither** → call the **raw HTTP API** with `curl` — recipes in
+   [`references/api-curl.md`](references/api-curl.md).
 
 ## Usage (CLI)
 
@@ -167,7 +169,9 @@ curl -s https://scraper-api.decodo.com/v2/scrape \
   -d '{"target":"universal","url":"https://example.com","markdown":true}'
 ```
 
-The token is the same basic auth token from the playground. Prefer the CLI or MCP when available.
+The token is the same basic auth token from the playground. More recipes (parsed SERP,
+screenshots, target names, response shape) in [`references/api-curl.md`](references/api-curl.md).
+Prefer the CLI or MCP when available.
 
 ## Links
 
