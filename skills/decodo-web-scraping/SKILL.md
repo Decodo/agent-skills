@@ -122,17 +122,25 @@ JSON for targets called with `--parse`). Useful modifiers:
 
 | Flag | Effect |
 | --- | --- |
-| `--parse` | Structured JSON for targets that support parsing (check `--help`) |
+| `--parse` | Structured JSON for targets that support it — **only on target commands** (e.g. `google-search`), not on `scrape`/`search`. Check `--help`. |
 | `--full` | Emit the full API response envelope (status, headers, task id, all results) |
 | `--format ndjson` | One JSON object per result — best for streaming into `jq` |
 | `--pretty` | Indented JSON |
 | `-o, --output <path>` | Write to a file instead of stdout (**required** for screenshots) |
 | `-v, --verbose` | Debug logs to **stderr** (stdout stays clean data) |
 
+The parsed JSON shape is target-specific. Pipe to `jq 'keys'` (then drill down, e.g.
+`jq '.results | keys'`) to discover the structure before writing a deeper query.
+
 ```bash
-decodo search "rust web scraping" --limit 3 --parse | jq '.[].title'
-decodo google-search "query" --format ndjson --full | jq -c '.results[]'
-decodo scrape https://ip.decodo.com/json | jq '.ip'
+# Parsed SERP → organic result titles (use a target command for --parse, not `search`)
+decodo google-search "rust web scraping" --parse | jq -r '.results.results.organic[].title'
+
+# Extract a field from a scraped JSON page (inspect with `jq keys` first if unsure)
+decodo scrape https://ip.decodo.com/json | jq -r '.proxy.ip'
+
+# Stream results as NDJSON; each record nests the parsed payload under `.content`
+decodo google-search "rust" --parse --format ndjson --full | jq -c '.content.results.results.organic'
 ```
 
 stdout is data; logs and errors go to stderr — pipes stay clean.
