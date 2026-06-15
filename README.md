@@ -42,18 +42,7 @@ install once a token is configured.
 
 ```
 skills/<skill-name>/SKILL.md   # one skill per directory; dir name must match frontmatter `name`
-scripts/lint-skills.py         # frontmatter validator (run in CI)
 ```
-
-## Development
-
-Validate skill frontmatter locally before pushing:
-
-```bash
-python3 scripts/lint-skills.py
-```
-
-CI runs the same check on every push and pull request.
 
 ## Related
 
