@@ -18,6 +18,20 @@ More skills (workflow recipes like price monitoring and competitive intel) will 
 
 ## Install
 
+### As a plugin (recommended)
+
+In Claude Code, add this repo as a plugin marketplace and install the `decodo` plugin — it bundles
+every skill in one step:
+
+```text
+/plugin marketplace add Decodo/agent-skills
+/plugin install decodo@decodo-skills
+```
+
+(`decodo-skills` is the marketplace name, `decodo` is the plugin.)
+
+### Manual copy
+
 These are [Anthropic-format agent skills](https://docs.claude.com/en/docs/claude-code/skills).
 Copy a skill into your agent's skills directory:
 
