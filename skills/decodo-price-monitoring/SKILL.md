@@ -62,10 +62,23 @@ decodo google-shopping-search "logitech mx master 3s" --parse \
 
 ## 2. Find the cheapest seller
 
+Show the lowest listings with merchant + title and **let the user/agent judge** — don't blindly
+take the global minimum. Google Shopping results mix in accessories (skins, cases, grips), used
+items, and variants, so the cheapest row is often *not* the product (e.g. an $18.99 "Skins &
+Wraps" outranking the $36 mouse).
+
 ```bash
 decodo google-shopping-search "logitech mx master 3s" --parse \
-  | jq -r '[.results.results.organic[] | {price, title}] | min_by(.price)
-           | "cheapest: \(.price) — \(.title)"'
+  | jq -r '[.results.results.organic[]] | sort_by(.price) | .[0:5][]
+           | "\(.price_str)\t\(.merchant.name)\t\(.title)"'
+```
+
+To narrow to the actual product, filter out accessory titles first:
+
+```bash
+  ... | jq -r '[.results.results.organic[]
+       | select(.title | test("skin|wrap|case|cover|grip|protector"; "i") | not)]
+       | sort_by(.price) | .[0] | "\(.price_str) — \(.merchant.name)"'
 ```
 
 ## 3. Record a price over time (NDJSON log)
