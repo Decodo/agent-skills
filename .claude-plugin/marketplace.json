@@ -1,0 +1,45 @@
+{
+  "name": "decodo-skills",
+  "owner": {
+    "name": "Decodo",
+    "url": "https://decodo.com"
+  },
+  "metadata": {
+    "description": "Official Decodo agent skills for web scraping, search, e-commerce/SERP/social data, and price monitoring.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "decodo",
+      "source": "./",
+      "description": "Web scraping and structured data extraction powered by Decodo. Bundles skills for fetching web data (scrape, Google/Bing search, Amazon/Walmart/Target e-commerce, Reddit/TikTok/YouTube social) via the Decodo CLI, hosted MCP server, or raw API, plus a price-monitoring workflow (current price, cheapest seller, track prices over time and detect drops). Handles JavaScript rendering, anti-bot/CAPTCHA, proxy rotation, and geo-targeting.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Decodo",
+        "url": "https://decodo.com"
+      },
+      "homepage": "https://decodo.com",
+      "repository": "https://github.com/Decodo/agent-skills",
+      "license": "MIT",
+      "category": "data-extraction",
+      "keywords": [
+        "web-scraping",
+        "scraping",
+        "search",
+        "serp",
+        "ecommerce",
+        "price-monitoring",
+        "decodo",
+        "mcp",
+        "cli",
+        "claude-code",
+        "amazon",
+        "walmart",
+        "target",
+        "google-shopping",
+        "captcha-bypass",
+        "structured-data"
+      ]
+    }
+  ]
+}

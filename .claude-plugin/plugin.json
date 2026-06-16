@@ -1,0 +1,26 @@
+{
+  "name": "decodo",
+  "displayName": "Decodo",
+  "description": "Web scraping and structured data extraction powered by Decodo — scrape, search (Google/Bing), e-commerce (Amazon/Walmart/Target), social (Reddit/TikTok/YouTube), and price monitoring, via the Decodo CLI, hosted MCP server, or raw API. Handles JavaScript rendering, anti-bot/CAPTCHA, proxy rotation, and geo-targeting.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Decodo",
+    "url": "https://decodo.com"
+  },
+  "homepage": "https://decodo.com",
+  "repository": "https://github.com/Decodo/agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "keywords": [
+    "web-scraping",
+    "scraping",
+    "search",
+    "serp",
+    "ecommerce",
+    "price-monitoring",
+    "decodo",
+    "mcp",
+    "cli",
+    "claude-code"
+  ]
+}
