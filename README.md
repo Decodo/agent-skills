@@ -13,8 +13,9 @@ infrastructure.
 | Skill | What it does |
 | --- | --- |
 | [`decodo-web-scraping`](skills/decodo-web-scraping/SKILL.md) | Routing layer for scraping, search (Google/Bing), e-commerce (Amazon/Walmart/Target), and social (Reddit/TikTok/YouTube). Routes across the `decodo` CLI, the hosted MCP server, and the raw HTTP API. |
+| [`decodo-price-monitoring`](skills/decodo-price-monitoring/SKILL.md) | Workflow for pricing: get a current price, find the cheapest seller across retailers, and track prices over time to catch drops (Amazon, Walmart, Target, Google Shopping). |
 
-More skills (workflow recipes like price monitoring and competitive intel) will follow.
+More workflow skills (e.g. competitive intel) will follow.
 
 ## Install
 
