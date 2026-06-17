@@ -109,6 +109,10 @@ decodo google-search --help    # exact flags for a target (--parse, --geo, ...)
 decodo amazon-product --help
 ```
 
+**Prefer a dedicated target** (`reddit-subreddit`, `amazon-product`, …) over a generic
+`scrape <url>` when one exists — it returns parsed, cleaner data and avoids guesswork. Check
+`decodo targets` first.
+
 Then call a target directly:
 
 ```bash
@@ -133,6 +137,11 @@ JSON for targets called with `--parse`). Useful modifiers:
 
 The parsed JSON shape is target-specific. Pipe to `jq 'keys'` (then drill down, e.g.
 `jq '.results | keys'`) to discover the structure before writing a deeper query.
+
+**Keep context small.** Pipe straight to `jq` and select only the fields you need; make one
+request and extract from it. Don't dump raw, `--pretty`, or `--full` payloads just to "inspect"
+— use `jq 'keys'`. `--full` includes the response envelope (large headers/cookies), so use it
+only when you actually need status/headers.
 
 ```bash
 # Parsed SERP → organic result titles (use a target command for --parse, not `search`)
