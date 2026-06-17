@@ -56,7 +56,8 @@ install once a token is configured.
 ## Repo layout
 
 ```
-skills/<skill-name>/SKILL.md   # one skill per directory; dir name must match frontmatter `name`
+skills/<skill-name>/SKILL.md       # one skill per directory; dir name must match frontmatter `name`
+skills/<skill-name>/references/    # optional deep-dive docs the SKILL.md links to (progressive disclosure)
 ```
 
 ## Related

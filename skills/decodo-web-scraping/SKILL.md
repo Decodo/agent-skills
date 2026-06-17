@@ -81,8 +81,10 @@ npm install -g @decodo/cli                                # any platform
 1. **Shell available** (Claude Code, Cursor, Codex CLI, Gemini CLI, Windsurf, terminal) → use
    the **`decodo` CLI**. This is the default and the rest of this skill assumes it.
 2. **No shell** (Claude Desktop, claude.ai, an MCP-only client) → use the hosted **MCP server**
-   at `https://mcp.decodo.com/mcp` (Basic auth with the same token). Add it as an MCP connector.
-3. **Neither** → call the **raw HTTP API** with `curl` (see *Raw API fallback*).
+   at `https://mcp.decodo.com/mcp` (Basic auth with the same token). Per-client config in
+   [`references/mcp-setup.md`](references/mcp-setup.md).
+3. **Neither** → call the **raw HTTP API** with `curl` — recipes in
+   [`references/api-curl.md`](references/api-curl.md).
 
 ## Usage (CLI)
 
@@ -112,7 +114,7 @@ Then call a target directly:
 ```bash
 decodo google-search "query" --parse        # structured JSON instead of raw SERP
 decodo amazon-product B09H74FXNW --parse
-decodo universal https://example.com         # generic target, full flag surface
+decodo universal https://example.com         # generic target with the most flags — see --help
 ```
 
 ## Output handling (important for piping)
@@ -126,7 +128,7 @@ JSON for targets called with `--parse`). Useful modifiers:
 | `--full` | Emit the full API response envelope (status, headers, task id, all results) |
 | `--format ndjson` | One JSON object per result — best for streaming into `jq` |
 | `--pretty` | Indented JSON |
-| `-o, --output <path>` | Write to a file instead of stdout (**required** for screenshots) |
+| `-o, --output <path>` | Write to a file instead of stdout. Screenshots always write to a file (never stdout); `-o` sets the path, otherwise it defaults to `<host>.png` |
 | `-v, --verbose` | Debug logs to **stderr** (stdout stays clean data) |
 
 The parsed JSON shape is target-specific. Pipe to `jq 'keys'` (then drill down, e.g.
@@ -155,7 +157,7 @@ stdout is data; logs and errors go to stderr — pipes stay clean.
 | 3 | Auth error | Token missing/invalid → redo **Setup step 2** |
 | 4 | Validation error | Fix the argument/flag the message names |
 | 5 | Rate limited | Back off and retry; reduce concurrency |
-| 6 | Timeout | Retry, or raise `--timeout` |
+| 6 | Timeout | Retry with backoff |
 | 7 | Network/server error | Retry with backoff |
 
 ## Raw API fallback (no CLI, no MCP)
@@ -167,7 +169,9 @@ curl -s https://scraper-api.decodo.com/v2/scrape \
   -d '{"target":"universal","url":"https://example.com","markdown":true}'
 ```
 
-The token is the same basic auth token from the playground. Prefer the CLI or MCP when available.
+The token is the same basic auth token from the playground. More recipes (parsed SERP,
+screenshots, target names, response shape) in [`references/api-curl.md`](references/api-curl.md).
+Prefer the CLI or MCP when available.
 
 ## Links
 
