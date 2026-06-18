@@ -67,6 +67,10 @@ decodo setup --token '<token>'      # validates, then saves to config
 Do **not** run a bare `decodo setup` — it opens a hidden interactive prompt you cannot drive.
 Token precedence: `--token` flag → `DECODO_AUTH_TOKEN` env → saved config.
 
+**Treat the token as a secret.** If `whoami` reports no auth, ask the user to set
+`DECODO_AUTH_TOKEN` or run `decodo setup --token <token>`. Never `cat`, read, or print the token
+from a config file (e.g. `~/.config/decodo/config.json`) to work around missing auth.
+
 ### 3. Install for repeat use (optional)
 
 ```bash
@@ -109,6 +113,10 @@ decodo google-search --help    # exact flags for a target (--parse, --geo, ...)
 decodo amazon-product --help
 ```
 
+**Prefer a dedicated target** (`reddit-subreddit`, `amazon-product`, …) over a generic
+`scrape <url>` when one exists — it returns parsed, cleaner data and avoids guesswork. Check
+`decodo targets` first.
+
 Then call a target directly:
 
 ```bash
@@ -133,6 +141,11 @@ JSON for targets called with `--parse`). Useful modifiers:
 
 The parsed JSON shape is target-specific. Pipe to `jq 'keys'` (then drill down, e.g.
 `jq '.results | keys'`) to discover the structure before writing a deeper query.
+
+**Keep context small.** Pipe straight to `jq` and select only the fields you need; make one
+request and extract from it. Don't dump raw, `--pretty`, or `--full` payloads just to "inspect"
+— use `jq 'keys'`. `--full` includes the response envelope (large headers/cookies), so use it
+only when you actually need status/headers.
 
 ```bash
 # Parsed SERP → organic result titles (use a target command for --parse, not `search`)
