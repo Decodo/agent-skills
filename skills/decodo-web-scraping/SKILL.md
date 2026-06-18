@@ -67,6 +67,10 @@ decodo setup --token '<token>'      # validates, then saves to config
 Do **not** run a bare `decodo setup` — it opens a hidden interactive prompt you cannot drive.
 Token precedence: `--token` flag → `DECODO_AUTH_TOKEN` env → saved config.
 
+**Treat the token as a secret.** If `whoami` reports no auth, ask the user to set
+`DECODO_AUTH_TOKEN` or run `decodo setup --token <token>`. Never `cat`, read, or print the token
+from a config file (e.g. `~/.config/decodo/config.json`) to work around missing auth.
+
 ### 3. Install for repeat use (optional)
 
 ```bash
