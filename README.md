@@ -1,5 +1,11 @@
 # Decodo agent skills
 
+[![](https://dcbadge.limes.pink/api/server/https://discord.gg/Ja8dqKgvbZ)](https://discord.gg/Ja8dqKgvbZ)
+
+<p align="center">
+<a href="https://dashboard.decodo.com/integrations?utm_source=github&utm_medium=social&utm_campaign=agent_skills"> <img src="https://github.com/user-attachments/assets/a1e52a9e-3da1-4081-b3c6-053aafb8f196"/></a>
+</p>
+
 Agent skills that teach AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Windsurf,
 Claude Desktop, claude.ai) **when** to reach for [Decodo](https://decodo.com) for web scraping,
 **which** surface to use, and **how** to call it.
@@ -64,6 +70,14 @@ skills/<skill-name>/references/    # optional deep-dive docs the SKILL.md links 
 
 - [`Decodo/cli`](https://github.com/Decodo/cli) — the `decodo` CLI (`@decodo/cli` on npm)
 - [`Decodo/mcp-server`](https://github.com/Decodo/mcp-server) — hosted + self-host MCP server
+
+## Try it
+
+Plug Decodo into your AI workflow in just a few clicks and equip your AI agents with real-time
+data from any website.
+
+[Start for free](https://dashboard.decodo.com/) | [Docs](https://help.decodo.com/docs/introduction)
+| [Discord](https://discord.gg/Ja8dqKgvbZ)
 
 ## License
 
