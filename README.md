@@ -14,21 +14,27 @@ Decodo handles JavaScript rendering, anti-bot/CAPTCHA, proxy rotation, and geo-t
 (125M+ IPs across 195+ locations) so agents get clean web data without managing scraping
 infrastructure.
 
+## What are agent skills? 
+
+Agent skills are instruction files that extend what a coding agent knows how to do. Each skill has a structured description — the agent loads it on demand and follows it to set up tools, pick the right approach, and handle edge cases without extra prompting.
+
+Without a skill, an agent defaults to _curl_, Requests, or Playwright – tools that fail on JS-rendered pages, get blocked by anti-bot systems, and require you to manage proxies. The Decodo skills change that default: the agent detects when a plain fetch won't work and routes to the right Decodo surface automatically.
+
+
 ## Skills
 
 | Skill | What it does |
 | --- | --- |
-| [`decodo-web-scraping`](skills/decodo-web-scraping/SKILL.md) | Routing layer for scraping, search (Google/Bing), e-commerce (Amazon/Walmart/Target), and social (Reddit/TikTok/YouTube). Routes across the `decodo` CLI, the hosted MCP server, and the raw HTTP API. |
-| [`decodo-price-monitoring`](skills/decodo-price-monitoring/SKILL.md) | Workflow for pricing: get a current price, find the cheapest seller across retailers, and track prices over time to catch drops (Amazon, Walmart, Target, Google Shopping). |
+| [`decodo-web-scraping`](skills/decodo-web-scraping/SKILL.md) | Core routing layer for web scraping, Google/Bing search, Amazon/Walmart/Target eCommerce, and Reddit/TikTok/YouTube social data. Routes across the decodo CLI, the hosted MCP server, and the raw HTTP API depending on the agent's environment. |
+| [`decodo-price-monitoring`](skills/decodo-price-monitoring/SKILL.md) | Pricing workflow: get a current price, find the cheapest seller across retailers, and track prices over time to catch drops (Amazon, Walmart, Target, Google Shopping). Builds on the _decodo-web-scraping_ skill. |
 
-More workflow skills (e.g. competitive intel) will follow.
+More workflow skills (e.g., competitive intelligence) will be introduced in the future.
 
 ## Install
 
-### As a plugin (recommended)
+### As a plugin (recommended for Claude Code)
 
-In Claude Code, add this repo as a plugin marketplace and install the `decodo` plugin — it bundles
-every skill in one step:
+Add this repo as a plugin marketplace and install the decodo plugin – it bundles every skill in one step:
 
 ```text
 /plugin marketplace add Decodo/agent-skills
@@ -48,16 +54,32 @@ mkdir -p ~/.claude/skills
 cp -r skills/decodo-web-scraping ~/.claude/skills/
 ```
 
-The agent loads the skill on demand based on its `description`, then follows it to set up and
-call Decodo. The skill leads with `npx @decodo/cli`, so an agent can start scraping with zero
-install once a token is configured.
+The agent loads skills on demand – no additional configuration needed.
 
 ## What the skill expects
 
-- A Decodo Web Scraping API basic auth token — free tier (up to 2K requests, no card) at
-  <https://dashboard.decodo.com/playground>.
-- A shell for the CLI path. With no shell, the skill routes to the hosted MCP server
-  (`https://mcp.decodo.com/mcp`) or the raw HTTP API.
+- A Decodo Web Scraping API basic auth token – free tier (up to 2K requests, no card) available from the [Decodo dashboard](https://dashboard.decodo.com/playground)
+- A shell for the CLI path. With no shell, the skill routes to the hosted MCP server (https://mcp.decodo.com/mcp) or the raw HTTP API automatically.
+
+## Example prompts
+
+Once a skill is installed, try these with your agent:
+
+```
+Scrape the top 5 Hacker News headlines and summarize them.
+```
+```
+Search Google for "best residential proxy providers" and give me the top organic results.
+```
+```
+What is the current price of Amazon product B09H74FXNW? Find the cheapest seller.
+```
+```
+Scrape reddit.com/r/Python for the top 5 posts this week.
+```
+```
+Track the price of B09H74FXNW on Amazon daily and alert me when it drops below $50.
+```
 
 ## Repo layout
 
@@ -70,11 +92,11 @@ skills/<skill-name>/references/    # optional deep-dive docs the SKILL.md links 
 
 - [`Decodo/cli`](https://github.com/Decodo/cli) — the `decodo` CLI (`@decodo/cli` on npm)
 - [`Decodo/mcp-server`](https://github.com/Decodo/mcp-server) — hosted + self-host MCP server
+- [`Decodo/web-scraping-api`](https://github.com/Decodo/Web-Scraping-API) - raw HTTP API reference
 
 ## Try it
 
-Plug Decodo into your AI workflow in just a few clicks and equip your AI agents with real-time
-data from any website.
+Add a Decodo skill to your agent and give it real-time access to any website – no proxy setup, no anti-bot headaches.
 
 [Start for free](https://dashboard.decodo.com/) | [Docs](https://help.decodo.com/docs/introduction)
 | [Discord](https://discord.gg/Ja8dqKgvbZ)
