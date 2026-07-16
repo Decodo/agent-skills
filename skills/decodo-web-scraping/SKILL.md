@@ -74,8 +74,15 @@ from a config file (e.g. `~/.config/decodo/config.json`) to work around missing 
 ### 3. Install for repeat use (optional)
 
 ```bash
-curl -fsSL https://decodo.github.io/cli/install.sh | sh   # macOS / Linux
-npm install -g @decodo/cli                                # any platform
+npm install -g @decodo/cli                                # any platform (recommended)
+```
+
+macOS/Linux alternative — download and inspect before running:
+
+```bash
+curl -fsSL https://decodo.github.io/cli/install.sh -o install.sh
+# review install.sh before proceeding
+sh install.sh && rm install.sh
 ```
 
 `npx -y @decodo/cli <command>` works with zero install if you'd rather not install anything.
