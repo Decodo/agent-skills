@@ -58,7 +58,7 @@ The agent loads skills on demand – no additional configuration needed.
 
 ## What the skill expects
 
-- A Decodo Web Scraping API basic auth token – free tier (up to 2K requests, no card) available from the [Decodo dashboard](https://dashboard.decodo.com/playground)
+- A Decodo API key – free tier (up to 2K requests, no card) available from the [Decodo dashboard](https://dashboard.decodo.com/web-data/playground)
 - A shell for the CLI path. With no shell, the skill routes to the hosted MCP server (https://mcp.decodo.com/mcp) or the raw HTTP API automatically.
 
 ## Example prompts

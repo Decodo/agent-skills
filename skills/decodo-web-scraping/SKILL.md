@@ -49,26 +49,29 @@ npx -y @decodo/cli whoami
 
 ### 2. Authenticate
 
-The user needs a Web Scraping API **basic auth token** from
-<https://dashboard.decodo.com/playground> (free account = up to 2K requests, no card).
+The user needs a Decodo **API key** from the dashboard at <https://dashboard.decodo.com/web-data/playground>
+(free account = up to 2K requests, no card). One key covers scraping, Map and Crawl.
 
 Prefer the environment variable — it needs no interaction and is easy to scope to a session:
 
 ```bash
-export DECODO_AUTH_TOKEN='<token>'
+export DECODO_AUTH_TOKEN='<api-key>'
 ```
+
+The variable keeps its `DECODO_AUTH_TOKEN` name; the CLI detects whether the value is an API key
+or a legacy basic auth token.
 
 To persist it to the CLI config non-interactively:
 
 ```bash
-decodo setup --token '<token>'      # validates, then saves to config
+decodo setup --token '<api-key>'   # validates, then saves to config
 ```
 
 Do **not** run a bare `decodo setup` — it opens a hidden interactive prompt you cannot drive.
-Token precedence: `--token` flag → `DECODO_AUTH_TOKEN` env → saved config.
+Credential precedence: `--token` flag → `DECODO_AUTH_TOKEN` env → saved config.
 
-**Treat the token as a secret.** If `whoami` reports no auth, ask the user to set
-`DECODO_AUTH_TOKEN` or run `decodo setup --token <token>`. Never `cat`, read, or print the token
+**Treat the key as a secret.** If `whoami` reports no auth, ask the user to set
+`DECODO_AUTH_TOKEN` or run `decodo setup --token <api-key>`. Never `cat`, read, or print the key
 from a config file (e.g. `~/.config/decodo/config.json`) to work around missing auth.
 
 ### 3. Install for repeat use (optional)
@@ -167,7 +170,7 @@ stdout is data; logs and errors go to stderr — pipes stay clean.
 | 0 | Success | — |
 | 1 | Generic error | Read stderr |
 | 2 | Usage error (bad flags) | Re-check `--help` |
-| 3 | Auth error | Token missing/invalid → redo **Setup step 2** |
+| 3 | Auth error | Key missing/invalid → redo **Setup step 2** |
 | 4 | Validation error | Fix the argument/flag the message names |
 | 5 | Rate limited | Back off and retry; reduce concurrency |
 | 6 | Timeout | Retry with backoff |
@@ -176,13 +179,13 @@ stdout is data; logs and errors go to stderr — pipes stay clean.
 ## Raw API fallback (no CLI, no MCP)
 
 ```bash
-curl -s https://scraper-api.decodo.com/v2/scrape \
-  -H "Authorization: Basic $DECODO_AUTH_TOKEN" \
+curl -s https://data.decodo.com/v1/scrape \
+  -H "Authorization: Bearer $DECODO_AUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"target":"universal","url":"https://example.com","markdown":true}'
 ```
 
-The token is the same basic auth token from the playground. More recipes (parsed SERP,
+The key is the same API key from the dashboard, sent as a Bearer token. More recipes (parsed SERP,
 screenshots, target names, response shape) in [`references/api-curl.md`](references/api-curl.md).
 Prefer the CLI or MCP when available.
 
@@ -190,4 +193,4 @@ Prefer the CLI or MCP when available.
 
 - CLI: <https://github.com/Decodo/cli> · `@decodo/cli` on npm
 - MCP server: <https://github.com/Decodo/mcp-server> · hosted at `https://mcp.decodo.com/mcp`
-- Dashboard / token / free tier: <https://dashboard.decodo.com/playground>
+- Dashboard / API key / free tier: <https://dashboard.decodo.com>
