@@ -2,8 +2,8 @@
 
 Use this when the host has **no shell** (Claude Desktop, claude.ai) or when you prefer tool-call
 native scraping over the CLI. Decodo's MCP server is hosted at `https://mcp.decodo.com/mcp` and
-authenticates with the same Web Scraping API **basic auth token** used everywhere else
-(`Authorization: Basic <token>`). Get a token at <https://dashboard.decodo.com/playground>
+authenticates with the same Web Scraping API **key** used everywhere else
+(`Authorization: Bearer <api-key>`). Get a key at <https://dashboard.decodo.com/web-data/playground>
 (free tier: ~2K requests, no card).
 
 ## Hosted server — generic config
@@ -15,7 +15,7 @@ Most MCP clients accept a remote server by URL + headers. Add:
   "mcpServers": {
     "Decodo": {
       "url": "https://mcp.decodo.com/mcp",
-      "headers": { "Authorization": "Basic <basic_auth_token>" }
+      "headers": { "Authorization": "Bearer <api_key>" }
     }
   }
 }
@@ -40,7 +40,7 @@ MCP in Claude Code:
 
 ```bash
 claude mcp add --transport http Decodo https://mcp.decodo.com/mcp \
-  --header "Authorization: Basic <basic_auth_token>"
+  --header "Authorization: Bearer <api_key>"
 ```
 
 ### Claude Desktop
@@ -55,7 +55,7 @@ claude mcp add --transport http Decodo https://mcp.decodo.com/mcp \
          "command": "npx",
          "args": ["-y", "@decodo/mcp-server"],
          "env": {
-           "SCRAPER_API_TOKEN": "<basic_auth_token>",
+           "SCRAPER_API_TOKEN": "<api_key>",
            "TOOLSETS": "web,ai"
          }
        }
@@ -95,5 +95,5 @@ In the client, prompt:
 
 > "Scrape the titles of the top 5 articles from Hacker News"
 
-A structured list back within seconds means it's wired up. An auth error means the token is
+A structured list back within seconds means it's wired up. An auth error means the key is
 wrong or missing — recheck it in the dashboard.
