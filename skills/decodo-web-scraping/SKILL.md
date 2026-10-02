@@ -58,8 +58,7 @@ Prefer the environment variable — it needs no interaction and is easy to scope
 export DECODO_AUTH_TOKEN='<api-key>'
 ```
 
-The variable keeps its `DECODO_AUTH_TOKEN` name; the CLI detects whether the value is an API key
-or a legacy basic auth token.
+The variable is named `DECODO_AUTH_TOKEN`, which holds an API key.
 
 To persist it to the CLI config non-interactively:
 
@@ -88,7 +87,7 @@ npm install -g @decodo/cli                                # any platform
 1. **Shell available** (Claude Code, Cursor, Codex CLI, Gemini CLI, Windsurf, terminal) → use
    the **`decodo` CLI**. This is the default and the rest of this skill assumes it.
 2. **No shell** (Claude Desktop, claude.ai, an MCP-only client) → use the hosted **MCP server**
-   at `https://mcp.decodo.com/mcp` (Basic auth with the same token). Per-client config in
+   at `https://mcp.decodo.com/mcp` (Bearer auth with the same API key). Per-client config in
    [`references/mcp-setup.md`](references/mcp-setup.md).
 3. **Neither** → call the **raw HTTP API** with `curl` — recipes in
    [`references/api-curl.md`](references/api-curl.md).
