@@ -181,6 +181,7 @@ stdout is data; logs and errors go to stderr — pipes stay clean.
 curl -s https://data.decodo.com/v1/scrape \
   -H "Authorization: Bearer $DECODO_AUTH_TOKEN" \
   -H "Content-Type: application/json" \
+  -H "x-integration: agent-skills" \
   -d '{"target":"universal","url":"https://example.com","markdown":true}'
 ```
 
