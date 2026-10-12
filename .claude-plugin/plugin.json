@@ -2,7 +2,7 @@
   "name": "decodo",
   "displayName": "Decodo",
   "description": "Web scraping and structured data extraction powered by Decodo — scrape, search (Google/Bing), e-commerce (Amazon/Walmart/Target), social (Reddit/TikTok/YouTube), and price monitoring, via the Decodo CLI, hosted MCP server, or raw API. Handles JavaScript rendering, anti-bot/CAPTCHA, proxy rotation, and geo-targeting.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "Decodo",
     "url": "https://decodo.com"
