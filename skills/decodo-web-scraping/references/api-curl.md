@@ -59,6 +59,29 @@ curl -s https://data.decodo.com/v1/scrape \
   -d '{"target":"universal","url":"https://example.com","headless":"png"}'
 ```
 
+## Search, map and crawl (Data API)
+
+These endpoints sit on the same host and need an API key; a basic auth token is rejected.
+
+```bash
+H=(-H "Authorization: Bearer $DECODO_AUTH_TOKEN" -H "Content-Type: application/json" -H "x-integration: agent-skills")
+
+# Web search → parsed JSON with .organic[]
+curl -s https://data.decodo.com/v1/search "${H[@]}" -d '{"query":"rust web scraping","geo":"de"}'
+
+# Map → .results[].content.links[].url
+curl -s https://data.decodo.com/v1/map "${H[@]}" \
+  -d '{"url":"https://example.com","limit":100,"select_paths":["/blog/*"]}'
+
+# Crawl: start (returns crawl_id), poll status, then page through results with `next`
+curl -s https://data.decodo.com/v1/crawl "${H[@]}" -d '{"url":"https://example.com","limit":50}'
+curl -s https://data.decodo.com/v1/crawl/<crawl_id>/status "${H[@]}"
+curl -s https://data.decodo.com/v1/crawl/<crawl_id> "${H[@]}" -o pages.json
+curl -s -X POST https://data.decodo.com/v1/crawl/<crawl_id>/cancel "${H[@]}"
+```
+
+Write crawl pages to a file and read them with `jq`, never straight into context.
+
 ## Response shape
 
 The response is an envelope: `{"results":[{ "content": ..., "status_code": ..., "task_id": ... }], ...}`.
