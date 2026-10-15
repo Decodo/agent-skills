@@ -202,8 +202,8 @@ decodo universal https://example.com         # generic target with the most flag
 ## Output handling (important for piping)
 
 By default a command prints the first result's `content` (markdown for `scrape`, parsed
-JSON for targets called with `--parse`). These modifiers apply to `scrape` and target commands;
-`search`, `map` and `crawl` take only the flags shown in their section above.
+JSON for targets called with `--parse`). These modifiers apply to `scrape` and target commands.
+`search`, `map` and `crawl` support a subset; check `decodo <command> --help`.
 
 | Flag | Effect |
 | --- | --- |

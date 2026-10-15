@@ -76,7 +76,7 @@ curl -s https://data.decodo.com/v1/map "${H[@]}" \
 # Crawl: start (returns crawl_id), poll status, then page through results with `next`
 curl -s https://data.decodo.com/v1/crawl "${H[@]}" -d '{"url":"https://example.com","limit":50}'
 curl -s https://data.decodo.com/v1/crawl/<crawl_id>/status "${H[@]}"
-curl -s https://data.decodo.com/v1/crawl/<crawl_id> "${H[@]}" -o pages.json
+curl -s "https://data.decodo.com/v1/crawl/<crawl_id>?type=content" "${H[@]}" -o pages.json  # omit ?type=content for metadata only
 curl -s -X POST https://data.decodo.com/v1/crawl/<crawl_id>/cancel "${H[@]}"
 ```
 
