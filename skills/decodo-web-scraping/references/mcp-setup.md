@@ -23,10 +23,10 @@ Most MCP clients accept a remote server by URL + headers. Add:
 
 ### Toolsets (optional, recommended)
 
-The server exposes 36 tools across five toolsets: `web`, `search`, `ecommerce`,
-`social_media`, `ai`. `web` holds `scrape_as_markdown`, `screenshot`, `map` and the
-`crawl_start` / `crawl_status` / `crawl_results` / `crawl_cancel` tools; `search` holds the
-web `search` tool plus the Google/Bing targets. `search`, `map` and the crawl tools need an API
+Tools are grouped into five toolsets: `web` (scraping, screenshots, map and crawl), `search`
+(web and SERP search), `ecommerce`, `social_media` and `ai`. The hosted server hides some
+tools, so the tool list your client shows is the source of truth; don't assume a tool exists
+because the npm package or its README lists it. `search`, `map` and the crawl tools need an API
 key, not a basic auth token. Enabling only what you need keeps tool selection clean and the
 agent faster. On the hosted URL, scope with a query param:
 
