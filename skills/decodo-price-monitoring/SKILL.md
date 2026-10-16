@@ -88,7 +88,8 @@ Append one timestamped line per check; the file becomes your time series.
 ```bash
 ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 price=$(decodo amazon-pricing B09H74FXNW --parse | jq -r '.results.pricing[0].price')
-printf '{"ts":"%s","sku":"B09H74FXNW","price":%s}\n' "$ts" "$price" >> prices.ndjson
+jq -cn --arg ts "$ts" --arg sku "B09H74FXNW" --argjson price "$price" \
+  '{"ts":$ts,"sku":$sku,"price":$price}' >> prices.ndjson
 ```
 
 ## 4. Detect a drop
