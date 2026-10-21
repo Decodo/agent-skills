@@ -1,0 +1,38 @@
+name: Version check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check plugin version
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          head_version=$(.github/scripts/plugin-version.sh)
+
+          if git diff --quiet "$BASE_SHA"...HEAD -- skills/; then
+            echo "No skill changes; version $head_version is consistent."
+            exit 0
+          fi
+
+          base_version=$(git show "$BASE_SHA:.claude-plugin/plugin.json" | jq -r '.version')
+          highest=$(printf '%s\n%s\n' "$base_version" "$head_version" | sort -V | tail -n1)
+
+          if [[ "$head_version" == "$base_version" || "$highest" != "$head_version" ]]; then
+            echo "::error::Skills changed but the plugin version was not bumped (main: $base_version, this PR: $head_version). Bump version in .claude-plugin/plugin.json and both versions in .claude-plugin/marketplace.json."
+            exit 1
+          fi
+
+          echo "Version bumped: $base_version -> $head_version"
