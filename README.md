@@ -88,6 +88,13 @@ skills/<skill-name>/SKILL.md       # one skill per directory; dir name must matc
 skills/<skill-name>/references/    # optional deep-dive docs the SKILL.md links to (progressive disclosure)
 ```
 
+## Versioning
+
+Any PR that changes `skills/` must bump the plugin version, in three places that must match:
+`version` in `.claude-plugin/plugin.json`, and `metadata.version` and `plugins[].version` in
+`.claude-plugin/marketplace.json`. CI fails otherwise. Merging a new version to `main` tags it
+`vX.Y.Z` and creates a GitHub Release with generated notes.
+
 ## Related
 
 - [`Decodo/cli`](https://github.com/Decodo/cli) — the `decodo` CLI (`@decodo/cli` on npm)
