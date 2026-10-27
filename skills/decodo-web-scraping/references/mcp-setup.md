@@ -4,7 +4,7 @@ Use this when the host has **no shell** (Claude Desktop, claude.ai) or when you 
 native scraping over the CLI. Decodo's MCP server is hosted at `https://mcp.decodo.com/mcp` and
 authenticates with the same Web Scraping API **key** used everywhere else
 (`Authorization: Bearer <api-key>`). Get a key at <https://dashboard.decodo.com/web-data/playground>
-(free tier: ~2K requests, no card).
+(free tier: up to 10K requests, no card).
 
 ## Hosted server — generic config
 

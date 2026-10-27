@@ -58,7 +58,7 @@ The agent loads skills on demand – no additional configuration needed.
 
 ## What the skill expects
 
-- A Decodo API key – free tier (up to 2K requests, no card) available from the [Decodo dashboard](https://dashboard.decodo.com/web-data/playground)
+- A Decodo API key – free tier (up to 10K requests, no card) available from the [Decodo dashboard](https://dashboard.decodo.com/web-data/playground)
 - A shell for the CLI path. With no shell, the skill routes to the hosted MCP server (https://mcp.decodo.com/mcp) or the raw HTTP API automatically.
 
 ## Example prompts
@@ -75,7 +75,7 @@ Search Google for "best residential proxy providers" and give me the top organic
 What is the current price of Amazon product B09H74FXNW? Find the cheapest seller.
 ```
 ```
-Scrape reddit.com/r/Python for the top 5 posts this week.
+Map quotes.toscrape.com and list every author page.
 ```
 ```
 Track the price of B09H74FXNW on Amazon daily and alert me when it drops below $50.
