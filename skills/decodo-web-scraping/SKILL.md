@@ -52,7 +52,7 @@ npx -y @decodo/cli whoami
 ### 2. Authenticate
 
 The user needs a Decodo **API key** from the dashboard at <https://dashboard.decodo.com/web-data/playground>
-(free account = up to 2K requests, no card). One key covers scraping, search, map and crawl.
+(free account = up to 10K requests, no card). One key covers scraping, search, map and crawl.
 
 Older plans only have a **basic auth token**. It works for `scrape`, `screenshot` and target
 commands, but `search`, `map` and `crawl` need an API key and reject a basic token with exit
@@ -227,7 +227,7 @@ only when you actually need status/headers.
 decodo google-search "rust web scraping" --parse | jq -r '.results.results.organic[].title'
 
 # Extract a field from a scraped JSON page (inspect with `jq keys` first if unsure)
-decodo scrape https://ip.decodo.com/json | jq -r '.proxy.ip'
+decodo universal https://ip.decodo.com/json --no-markdown | jq -r '.proxy.ip'
 
 # Stream results as NDJSON; each record nests the parsed payload under `.content`
 decodo google-search "rust" --parse --format ndjson --full | jq -c '.content.results.results.organic'
