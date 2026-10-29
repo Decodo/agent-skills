@@ -46,7 +46,7 @@ curl -s https://data.decodo.com/v1/scrape \
   -H "Authorization: Bearer $DECODO_AUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -H "x-integration: agent-skills" \
-  -d '{"target":"google_search","query":"rust web scraping","parse":true,"geo":"us"}'
+  -d '{"target":"google_search","query":"rust web scraping","parse":true,"geo":"US"}'
 ```
 
 ### Screenshot (PNG, base64 in the response)
@@ -67,7 +67,7 @@ These endpoints sit on the same host and need an API key; a basic auth token is 
 H=(-H "Authorization: Bearer $DECODO_AUTH_TOKEN" -H "Content-Type: application/json" -H "x-integration: agent-skills")
 
 # Web search → parsed JSON with .organic[]
-curl -s https://data.decodo.com/v1/search "${H[@]}" -d '{"query":"rust web scraping","geo":"de"}'
+curl -s https://data.decodo.com/v1/search "${H[@]}" -d '{"query":"rust web scraping","geo":"DE"}'
 
 # Map → .results[].content.links[].url
 curl -s https://data.decodo.com/v1/map "${H[@]}" \
