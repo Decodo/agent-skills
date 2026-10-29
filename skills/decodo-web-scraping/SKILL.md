@@ -104,9 +104,9 @@ npm install -g @decodo/cli                                # any platform
 
 ```bash
 decodo scrape https://example.com                  # markdown by default
-decodo scrape https://example.com --country us     # geo-target the request
+decodo scrape https://example.com --country US     # geo-target the request
 decodo search "best web scraping api" | jq -r '.organic[].link'   # web search, JSON
-decodo search "query" --geo de --locale de-DE --page 2           # geo, locale, next page
+decodo search "query" --geo DE --locale de-DE --page 2           # geo, locale, next page
 decodo map https://example.com --limit 100                       # site URLs, one per line
 decodo screenshot https://example.com -o shot.png                # PNG must go to a file
 ```
